@@ -229,5 +229,6 @@ export {
   handleSingleScoreCommand,
   handleTopScoresCommand,
   handleWeeklyRunCommand,
-  handleMissingMythicsCommand
+  handleMissingMythicsCommand,
+  weeklyTopByCharname
 }
