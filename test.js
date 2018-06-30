@@ -20,10 +20,9 @@ mainRef.on('value', function (snapshot) {
   console.log('The read failed: ' + errorObject.code);
 })
 
-followedRef.update({
+followedRef.set({
   '226502292625424396': [
     'Inath',
-    'Thraut',
     'Tanih'
   ],
   '179991621884968960': [
@@ -34,13 +33,11 @@ followedRef.update({
   if (error) {
     console.log("Data could not be saved." + error);
   } else {
+    const jee = followedRef.child('226502292625424396').push()
+
+    jee.set('Thraut');
     console.log("Data saved successfully.");
-    followedRef.child('226502292625424396').once('value', function (snapshot) {
-      const mains = snapshot.val()
-      console.log(JSON.stringify(mains, null, 2))
-    }, function (errorObject) {
-      console.log('The read failed: ' + errorObject.code);
-    })
+
   }
 })
 

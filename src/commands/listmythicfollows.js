@@ -18,7 +18,7 @@ const parseData = (discordUserName, datas) => {
     const response = {
         embed: {
             color: 3447003,
-            title: `Käyttäjän ${discordUserName} isoimmat mytyt`,
+            title: `Käyttäjän ${discordUserName} viikon isoimmat mytyt`,
             fields
         }
     }
@@ -29,20 +29,26 @@ const listMythicFollows = (discordUserId, discordUserName) => {
     logger.info(`msender was ${discordUserId}`)
     return new Promise((resolve, reject) => {
         followsRef.child(discordUserId).once('value', async (snap) => {
-            logger.info('got follows', )
-            let finalDatas = []
-            for (const charName of snap.val()) {
-                try {
-                    const runs = await weeklyTopByCharname(charName, 0)
-                    finalDatas.push(runs)
-                } catch (error) {
-                    finalDatas.push({
-                        "name": charName,
-                        "value": "Virhe hakiessa mytyjä"
-                    })
+            if (snap.val()) {
+                const charNames = snap.val()
+                logger.info('got follows' + JSON.stringify(snap.val(), null, 2))
+                let finalDatas = []
+                for (const key in charNames) {
+                    const charName = charNames[key]
+                    try {
+                        const runs = await weeklyTopByCharname(charName, 0)
+                        finalDatas.push(runs)
+                    } catch (error) {
+                        finalDatas.push({
+                            "name": charName,
+                            "value": "Virhe hakiessa mytyjä"
+                        })
+                    }
                 }
+                resolve(parseData(discordUserName, finalDatas))
+            } else {
+                resolve('Ei hahmoja tallessa')
             }
-            resolve(parseData(discordUserName, finalDatas))
         }, (errorObject) => {
             console.log('error follows')
             reject("The read failed: " + errorObject.code);

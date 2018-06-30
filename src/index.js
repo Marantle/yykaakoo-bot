@@ -16,6 +16,7 @@ import { handleCurrentWeatherCommand } from './commands/weather'
 import { handlePriceCommand } from './commands/monopolymoney'
 import { cheerUp, mock } from './commands/random'
 import { WowLogs } from './commands'
+import { addCharToMythicPlusTracker, clearMythicPlusFollows } from './commands/addcharnames.js'
 import progress from './commands/progress'
 import isArgusDead from './commands/isargusdead'
 import listAllMains from './commands/getmains.js'
@@ -57,6 +58,8 @@ client.on('message', async message => {
       'onkoarguskuollut': isArgusDead,
       'mainit': listAllMains,
       'munmytyt': listMythicFollows,
+      'seuraahahmoja': addCharToMythicPlusTracker,
+      'tyhjääseuratut': clearMythicPlusFollows
     }
 
     let commandPlaceholders = {
@@ -72,8 +75,10 @@ client.on('message', async message => {
       'hinta': 'What will you be doing when the hodlers take over the world?',
       'progress': 'jokohan tämä on tosi, x/y=1 given that x is current kills and y is maximum kills',
       'onkoarguskuollut': 'tarkistetaanpa...',
-      'mainit': 'listAllMains',
-      'mainit': 'listMythicFollows'
+      'mainit': 'haetaanpas maineja pilvestä',
+      'munmytyt': 'Tutkitaan asiaa...',
+      'seuraahahmoja': 'Lisätään hahmoa pilveen',
+      'tyhjääseuratut': 'Exterminating...'
     }
 
     console.log()
