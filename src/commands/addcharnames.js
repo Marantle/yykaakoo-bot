@@ -9,13 +9,13 @@ export const addCharToMythicPlusTracker = async (params, sentMessage, message) =
       let freshData = {}
       for (const charName of params) {
         if (charName.length < 13) {
-          if (!freshData[discordId])
-            freshData[discordId] = {}
-          freshData[discordId][charName] = charName
+          if (!freshData[charName])
+            freshData[charName] = {}
+          freshData[charName] = charName
         }
       }
 
-      followsRef.set(freshData, (error) => {
+      followsRef.child(message.author.id).set(freshData, (error) => {
         if (error) {
           console.log("Data could not be saved." + error);
         } else {
