@@ -15,7 +15,7 @@ import { findAllMissingEnchants } from './commands/enchantsnitch'
 import { handleCurrentWeatherCommand } from './commands/weather'
 import { handlePriceCommand } from './commands/monopolymoney'
 import { cheerUp, mock } from './commands/random'
-import { WowLogs } from './commands'
+import { WowLogs, characters, listcharacters } from './commands'
 import { addCharToMythicPlusTracker, clearMythicPlusFollows } from './commands/addcharnames.js'
 import progress from './commands/progress'
 import isArgusDead from './commands/isargusdead'
@@ -56,6 +56,8 @@ client.on('message', async message => {
       'hinta': handlePriceCommand,
       'progress': progress.handleMessage,
       'onkoarguskuollut': isArgusDead,
+      'hahmo': characters.handleMessage,
+      'listaahahmot': listcharacters.handleMessage,
       'mainit': listAllMains,
       'munmytyt': listMythicFollows,
       'seuraahahmoja': addCharToMythicPlusTracker,
