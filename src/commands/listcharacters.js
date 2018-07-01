@@ -4,14 +4,15 @@ import auth from '../config/auth.json'
 import logger from '../lib/logger'
 import classes from '../config/classes.json'
 import fs from 'fs'
-const low = require('lowdb')
+import usersRef from '../db/mains2.js'
+/*const low = require('lowdb')
 const FileSync = require('lowdb/adapters/FileSync')
  
 const adapter = new FileSync('db.json')
 const usersDb = low(adapter)
 usersDb.defaults({ users: [] })
     .write()
-
+*/
 const getCharacterClass = (id) => {
     const foundClass = classes.find((c) => {
         return c.id === id
@@ -27,9 +28,12 @@ const createCharactersString = (characters, role) => {
 
 const listcharacters = {
     getCharacters: async (role = 'main') => {
-        const users = await usersDb.get('users').map('characters').value()
-        // const characters = [].concat( ...(users.map((user) => user.characters)) )
-        const characters = [].concat( ...users ) 
+        // const users = await usersDb.get('users').map('characters').value()
+        let users = await usersRef.once('value');
+        
+        users = Object.values(users.val())
+        console.log(JSON.stringify(users));
+        const characters = [].concat( ...(users.map((user) => user.characters)))
         const mdps = characters.filter((character) => {
             return character.spec.role === 1
         })
@@ -46,7 +50,7 @@ const listcharacters = {
         let response = {
             embed: {
                 color: 3447003,
-                title: `BFA mainit`,
+                title: role === 'main' ? `BFA mainit` : 'BFA altit',
                 description: '',
                 fields: [
                     {

@@ -4,13 +4,7 @@ import auth from '../config/auth.json'
 import logger from '../lib/logger'
 import classes from '../config/classes.json'
 import fs from 'fs'
-const low = require('lowdb')
-const FileSync = require('lowdb/adapters/FileSync')
- 
-const adapter = new FileSync('db.json')
-const usersDb = low(adapter)
-usersDb.defaults({ users: [] })
-    .write()
+import usersRef from '../db/mains2.js'
 
 const getClassColor = (classId) => {
     const classColor = parseInt(classes.find((c) => {
@@ -35,12 +29,19 @@ const characters = {
     },
     validSpec: (characterSpec, classID) => {
         try {
-            return classes[classID-1].specs.find((spec) => {
+            let spec = classes[classID-1].specs.find((spec) => {
                 if (spec.name === characterSpec || spec.nicknames.includes(characterSpec) ) {
                     return spec.name;
                 }
                 return false
             })
+            if (spec) {
+                spec = Object.assign({
+                    name: spec.name,
+                    role: spec.role
+                })
+            }
+            return spec
         } catch (error) {
             console.log(error)
             return false
@@ -50,57 +51,67 @@ const characters = {
         return role === 'main' || role === 'alt'
     },
     saveCharacter: async (author, character) => {
-        const user = await usersDb.get('users')
-            .find({id: author.id})
-            .value()
-        let savedUser
-        if (user) {
-            if (character.role === "main") {
-                let oldMain = user.characters.find((char) => {
-                    return char.role === "main"
+        try {
+            let savedUser
+            let user = await usersRef.child(author.id).once('value')
+            user = user.val()
+            let newUser
+            if (user) {
+                if (character.role === "main") {
+                    let oldMain = user.characters.find((char) => {
+                        return char.role === "main"
+                    })
+                    if (oldMain) oldMain.role = "alt"
+                }
+                let foundCharacterIndex = user.characters.findIndex((char) => {
+                    return char.name === character.name
                 })
-                if (oldMain) oldMain.role = "alt"
-            }
-            let foundCharacterIndex = user.characters.findIndex((char) => {
-                return char.name === character.name
-            })
-            console.log(foundCharacterIndex)
-            if (foundCharacterIndex >= 0) {
-                user.characters.splice(foundCharacterIndex, 1, character)
+                console.log(foundCharacterIndex)
+                if (foundCharacterIndex >= 0) {
+                    user.characters.splice(foundCharacterIndex, 1, character)
+                } else {
+                    user.characters.push(character)
+                }
+                let updatedUser = Object.assign({
+                    ...user,
+                    username: author.username,
+                    characters: user.characters
+                });
+                await usersRef.child(author.id).set(updatedUser, (error) => {
+                    if (error) {
+                        console.log("Data could not be saved." + error)
+                        throw err
+                    } else {
+                        console.log("Data saved successfully.")
+                    }
+                })
+                return updatedUser
             } else {
-                user.characters.push(character)
-            }
-            let updatedUser = Object.assign({
-                ...user,
-                username: author.username,
-                characters: user.characters
-            });
-            savedUser = await usersDb.get('users')
-                .find({id: user.id})
-                .assign({
-                    username: updatedUser.username,
-                    characters: updatedUser.characters
-                })
-                .write()
-            return updatedUser;
-        } else {
-            let newUser = Object.assign({
-                id: author.id,
-                username: author.username,
-                characters: [character]
-            });
-            savedUser = await usersDb.get('users')
-                .push({
+                let newUser = Object.assign({
                     id: author.id,
-                    username: newUser.username,
-                    characters: newUser.characters
+                    username: author.username,
+                    characters: [character]
+                });
+                await usersRef.child(author.id).set(newUser, (error) => {
+                    if (error) {
+                        console.log("Data could not be saved." + error)
+                        throw err
+                    } else {
+                        console.log("Data saved successfully.")
+                    }
                 })
-                .write()
-            return newUser;
+                return newUser
+            }
+        } catch(err) {
+            console.log(err)
+            throw err
         }
     },
     handleMessage: async (params, sentMessage, message) => {
         try {
+            let users = await usersRef.once('value');
+            console.log(users);
+            users = users.val()
             if (params[0] === 'ohje') {
                 return 'Käytä komentoa näin: §hahmo nimi spekki main/alt'
             }
@@ -130,6 +141,7 @@ const characters = {
                 }
             }
         } catch (err) {
+            console.log(err)
             return 'Tapahtui virhe. Käytä komentoa näin: §hahmo nimi spekki main/alt'
         }
     }
