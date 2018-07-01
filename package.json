@@ -17,7 +17,6 @@
     "bluebird": "^3.5.1",
     "discord.js": "^11.3.1",
     "firebase-admin": "^5.12.1",
-    "lowdb": "^1.0.0",
     "moment": "^2.21.0",
     "winston": "^3.0.0-rc1"
   },
