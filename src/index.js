@@ -14,7 +14,7 @@ import { findAllMissingEnchants } from './commands/enchantsnitch'
 import { handleCurrentWeatherCommand } from './commands/weather'
 import { handlePriceCommand } from './commands/monopolymoney'
 import { cheerUp, mock } from './commands/random'
-import { WowLogs } from './commands'
+import { WowLogs, characters, listcharacters } from './commands'
 import progress from './commands/progress'
 import isArgusDead from './commands/isargusdead'
 
@@ -51,7 +51,9 @@ client.on('message', async message => {
       'sää': handleCurrentWeatherCommand,
       'hinta': handlePriceCommand,
       'progress': progress.handleMessage,
-      'onkoarguskuollut': isArgusDead
+      'onkoarguskuollut': isArgusDead,
+      'hahmo': characters.handleMessage,
+      'listaahahmot': listcharacters.handleMessage
     }
 
     let commandPlaceholders = {
@@ -96,7 +98,7 @@ client.on('message', async message => {
         .catch(console.error)
     } else if (reply && reply.embed) {
       logger.info(`sending embed`)
-      sentMessage.edit('')
+      sentMessage.delete()
         .then(msg => console.log(`end of yykaakoo sent a reply of [${msg.content}]`))
         .catch(console.error)
       message.channel.send(reply)
