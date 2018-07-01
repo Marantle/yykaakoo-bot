@@ -3,6 +3,7 @@ import { Client } from 'discord.js'
 import logger from './lib/logger'
 import auth from './config/auth.json'
 import config from './config/config.json'
+import serviceAccount from './config/serviceAccountKey.json'
 import {
   handleTopScoresCommand,
   handleSingleScoreCommand,
@@ -15,8 +16,11 @@ import { handleCurrentWeatherCommand } from './commands/weather'
 import { handlePriceCommand } from './commands/monopolymoney'
 import { cheerUp, mock } from './commands/random'
 import { WowLogs, characters, listcharacters } from './commands'
+import { addCharToMythicPlusTracker, clearMythicPlusFollows } from './commands/addcharnames.js'
 import progress from './commands/progress'
 import isArgusDead from './commands/isargusdead'
+import listAllMains from './commands/getmains.js'
+import listMythicFollows from './commands/listmythicfollows.js'
 
 logger.info(`bot starting ${new Date}`)
 const client = new Client()
@@ -53,7 +57,11 @@ client.on('message', async message => {
       'progress': progress.handleMessage,
       'onkoarguskuollut': isArgusDead,
       'hahmo': characters.handleMessage,
-      'listaahahmot': listcharacters.handleMessage
+      'listaahahmot': listcharacters.handleMessage,
+      'mainit': listAllMains,
+      'munmytyt': listMythicFollows,
+      'seuraahahmoja': addCharToMythicPlusTracker,
+      'tyhjääseuratut': clearMythicPlusFollows
     }
 
     let commandPlaceholders = {
@@ -69,7 +77,12 @@ client.on('message', async message => {
       'hinta': 'What will you be doing when the hodlers take over the world?',
       'progress': 'jokohan tämä on tosi, x/y=1 given that x is current kills and y is maximum kills',
       'onkoarguskuollut': 'tarkistetaanpa...',
+      'mainit': 'haetaanpas maineja pilvestä',
+      'munmytyt': 'Tutkitaan asiaa...',
+      'seuraahahmoja': 'Lisätään hahmoa pilveen',
+      'tyhjääseuratut': 'Exterminating...'
     }
+
     console.log()
     let args = message.content.substring(1).trim().split(' ')
     if (!args[0]) return
@@ -80,7 +93,9 @@ client.on('message', async message => {
     let sentMessage = await message.channel.send('Hetki, käsittelen...')
     if (simpleCommands[command]) {
       try {
-        sentMessage = await sentMessage.edit(commandPlaceholders[command])
+        if (commandPlaceholders[command]) {
+          sentMessage = await sentMessage.edit(commandPlaceholders[command])
+        }
         reply = await simpleCommands[command](params, sentMessage, message)
       } catch (error) {
         logger.error(error.stack)
@@ -92,15 +107,13 @@ client.on('message', async message => {
     }
 
     if (reply && reply.length > 0 && !reply.embed) {
-      logger.info(`sending reply`)
+      logger.info(`sending reply ${reply}`)
       sentMessage.edit(reply)
-        .then(msg => console.log(`end of yykaakoo sent a reply of [${msg.content}]`))
+        .then(msg => console.log(`end of yykaakoo sent a reply of <${msg.content}>`))
         .catch(console.error)
     } else if (reply && reply.embed) {
-      logger.info(`sending embed`)
+      logger.info(`sending embed ${reply}`)
       sentMessage.delete()
-        .then(msg => console.log(`end of yykaakoo sent a reply of [${msg.content}]`))
-        .catch(console.error)
       message.channel.send(reply)
     }
   }
