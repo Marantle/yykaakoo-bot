@@ -1,277 +1,277 @@
 [{
-    "id": 1,
-    "mask": 1,
-    "powerType": "rage",
-    "name": "Warrior",
-    "color": "#C79C6E",
-    "specs": [
-      {
-        "name": "arms",
-        "nicknames": ["kädet"],
-        "role": 1
-      },
-      {
-        "name": "protection",
-        "nicknames": ["prot", "protti", "tankki", "tank"],
-        "role": 3
-      },
-      {
-        "name": "fury",
-        "nicknames": [],
-        "role": 1
-      }
-    ]
+  "id": 1,
+  "mask": 1,
+  "powerType": "rage",
+  "name": "Warrior",
+  "color": "#C79C6E",
+  "specs": [
+    {
+      "name": "arms",
+      "nicknames": ["kädet"],
+      "role": 1
+    },
+    {
+      "name": "protection",
+      "nicknames": ["prot", "protti", "tankki", "tank"],
+      "role": 3
+    },
+    {
+      "name": "fury",
+      "nicknames": [],
+      "role": 1
+    }
+  ]
 }, {
-    "id": 2,
-    "mask": 2,
-    "powerType": "mana",
-    "name": "Paladin",
-    "color": "#F58CBA",
-    "specs": [
-      {
-        "name": "protection",
-        "nicknames": ["prot", "protti", "tankki", "tank"],
-        "role": 3
-      },
-      {
-        "name": "holy",
-        "nicknames": ["resto", "holy", "hiilu", "healer", "heal"],
-        "role": 4
-      },
-      {
-        "name": "retribution",
-        "nicknames": ["retri", "retu", "retard", "retardi", "wheelchair", "ret", "reppana", "retadin"],
-        "role": 1
-      }
-    ]
+  "id": 2,
+  "mask": 2,
+  "powerType": "mana",
+  "name": "Paladin",
+  "color": "#F58CBA",
+  "specs": [
+    {
+      "name": "protection",
+      "nicknames": ["prot", "protti", "tankki", "tank"],
+      "role": 3
+    },
+    {
+      "name": "holy",
+      "nicknames": ["resto", "holy", "hiilu", "healer", "heal"],
+      "role": 4
+    },
+    {
+      "name": "retribution",
+      "nicknames": ["retri", "retu", "retard", "retardi", "wheelchair", "ret", "reppana", "retadin"],
+      "role": 1
+    }
+  ]
 }, {
-    "id": 3,
-    "mask": 4,
-    "powerType": "focus",
-    "name": "Hunter",
-    "color": "#ABD473",
-    "specs": [
-      {
-        "name": "survival",
-        "nicknames": ["survi", "surv"],
-        "role": 1
-      },
-      {
-        "name": "beastmastery",
-        "nicknames": ["bm", "123"],
-        "role": 2
-      },
-      {
-        "name": "marksman",
-        "nicknames": ["mm", "mömmö", "marks"],
-        "role": 2
-      }
-    ]
+  "id": 3,
+  "mask": 4,
+  "powerType": "focus",
+  "name": "Hunter",
+  "color": "#ABD473",
+  "specs": [
+    {
+      "name": "survival",
+      "nicknames": ["survi", "surv"],
+      "role": 1
+    },
+    {
+      "name": "beastmastery",
+      "nicknames": ["bm", "123"],
+      "role": 2
+    },
+    {
+      "name": "marksmanship",
+      "nicknames": ["mm", "mömmö", "marks", "marksman"],
+      "role": 2
+    }
+  ]
 }, {
-    "id": 4,
-    "mask": 8,
-    "powerType": "energy",
-    "name": "Rogue",
-    "color": "#FFF569",
-    "specs": [
-      {
-        "name": "subtlety",
-        "nicknames": ["sub", "subi"],
-        "role": 1
-      },
-      {
-        "name": "assassination",
-        "nicknames": ["ass", "assa", "as", "assasination", "asa"],
-        "role": 1
-      },
-      {
-        "name": "outlaw",
-        "nicknames": ["combat"],
-        "role": 1
-      }
-    ]
+  "id": 4,
+  "mask": 8,
+  "powerType": "energy",
+  "name": "Rogue",
+  "color": "#FFF569",
+  "specs": [
+    {
+      "name": "subtlety",
+      "nicknames": ["sub", "subi"],
+      "role": 1
+    },
+    {
+      "name": "assassination",
+      "nicknames": ["ass", "assa", "as", "assasination", "asa"],
+      "role": 1
+    },
+    {
+      "name": "outlaw",
+      "nicknames": ["combat"],
+      "role": 1
+    }
+  ]
 }, {
-    "id": 5,
-    "mask": 16,
-    "powerType": "mana",
-    "name": "Priest",
-    "color": "#FFFFFF",
-    "specs": [
-      {
-        "name": "shadow",
-        "nicknames": ["dps", "varjo"],
-        "role": 2
-      },
-      {
-        "name": "holy",
-        "nicknames": [],
-        "role": 4
-      },
-      {
-        "name": "discipline",
-        "nicknames": ["disci", "disc", "tiski"],
-        "role": 4
-      }
-    ]
+  "id": 5,
+  "mask": 16,
+  "powerType": "mana",
+  "name": "Priest",
+  "color": "#FFFFFF",
+  "specs": [
+    {
+      "name": "shadow",
+      "nicknames": ["dps", "varjo"],
+      "role": 2
+    },
+    {
+      "name": "holy",
+      "nicknames": [],
+      "role": 4
+    },
+    {
+      "name": "discipline",
+      "nicknames": ["disci", "disc", "tiski"],
+      "role": 4
+    }
+  ]
 }, {
-    "id": 6,
-    "mask": 32,
-    "powerType": "runic-power",
-    "name": "Death Knight",
-    "color": "#C41F3B",
-    "specs": [
-      {
-        "name": "blood",
-        "nicknames": ["prot", "protti", "tankki"],
-        "role": 3
-      },
-      {
-        "name": "unholy",
-        "nicknames": ["uh"],
-        "role": 1
-      },
-      {
-        "name": "frost",
-        "nicknames": ["frosti"],
-        "role": 1
-      }
-    ]
+  "id": 6,
+  "mask": 32,
+  "powerType": "runic-power",
+  "name": "Death Knight",
+  "color": "#C41F3B",
+  "specs": [
+    {
+      "name": "blood",
+      "nicknames": ["prot", "protti", "tankki"],
+      "role": 3
+    },
+    {
+      "name": "unholy",
+      "nicknames": ["uh"],
+      "role": 1
+    },
+    {
+      "name": "frost",
+      "nicknames": ["frosti"],
+      "role": 1
+    }
+  ]
 }, {
-    "id": 7,
-    "mask": 64,
-    "powerType": "mana",
-    "name": "Shaman",
-    "color": "#0070DE",
-    "specs": [
-      {
-        "name": "enhancement",
-        "nicknames": ["enha", "encha", "enchament", "enh"],
-        "role": 1
-      },
-      {
-        "name": "restoration",
-        "nicknames": ["resto", "hiilu", "healer", "heal", "holy"],
-        "role": 4
-      },
-      {
-        "name": "elemental",
-        "nicknames": ["ele"],
-        "role": 2
-      }
-    ]
+  "id": 7,
+  "mask": 64,
+  "powerType": "mana",
+  "name": "Shaman",
+  "color": "#0070DE",
+  "specs": [
+    {
+      "name": "enhancement",
+      "nicknames": ["enha", "encha", "enchament", "enh"],
+      "role": 1
+    },
+    {
+      "name": "restoration",
+      "nicknames": ["resto", "hiilu", "healer", "heal", "holy"],
+      "role": 4
+    },
+    {
+      "name": "elemental",
+      "nicknames": ["ele"],
+      "role": 2
+    }
+  ]
 }, {
-    "id": 8,
-    "mask": 128,
-    "powerType": "mana",
-    "name": "Mage",
-    "color": "#69CCF0",
-    "specs": [
-      {
-        "name": "frost",
-        "nicknames": ["frosti", "jää"],
-        "role": 2
-      },
-      {
-        "name": "fire",
-        "nicknames": ["fire", "tuli"],
-        "role": 2
-      },
-      {
-        "name": "arcane",
-        "nicknames": [],
-        "role": 2
-      }
-    ]
+  "id": 8,
+  "mask": 128,
+  "powerType": "mana",
+  "name": "Mage",
+  "color": "#69CCF0",
+  "specs": [
+    {
+      "name": "frost",
+      "nicknames": ["frosti", "jää"],
+      "role": 2
+    },
+    {
+      "name": "fire",
+      "nicknames": ["fire", "tuli"],
+      "role": 2
+    },
+    {
+      "name": "arcane",
+      "nicknames": [],
+      "role": 2
+    }
+  ]
 }, {
-    "id": 9,
-    "mask": 256,
-    "powerType": "mana",
-    "name": "Warlock",
-    "color": "#9482C9",
-    "specs": [
-      {
-        "name": "demonology",
-        "nicknames": ["demo"],
-        "role": 2
-      },
-      {
-        "name": "affliction",
-        "nicknames": ["affli", "aff"],
-        "role": 2
-      },
-      {
-        "name": "destruction",
-        "nicknames": ["destro"],
-        "role": 2
-      }
-    ]
+  "id": 9,
+  "mask": 256,
+  "powerType": "mana",
+  "name": "Warlock",
+  "color": "#9482C9",
+  "specs": [
+    {
+      "name": "demonology",
+      "nicknames": ["demo"],
+      "role": 2
+    },
+    {
+      "name": "affliction",
+      "nicknames": ["affli", "aff"],
+      "role": 2
+    },
+    {
+      "name": "destruction",
+      "nicknames": ["destro"],
+      "role": 2
+    }
+  ]
 }, {
-    "id": 10,
-    "mask": 512,
-    "powerType": "energy",
-    "name": "Monk",
-    "color": "#00FF96",
-    "specs": [
-      {
-        "name": "mistweaver",
-        "nicknames": ["mw"],
-        "role": 4
-      },
-      {
-        "name": "brewmaster",
-        "nicknames": ["bm"],
-        "role": 3
-      },
-      {
-        "name": "windwalker",
-        "nicknames": ["ww"],
-        "role": 1
-      }
-    ]
+  "id": 10,
+  "mask": 512,
+  "powerType": "energy",
+  "name": "Monk",
+  "color": "#00FF96",
+  "specs": [
+    {
+      "name": "mistweaver",
+      "nicknames": ["mw"],
+      "role": 4
+    },
+    {
+      "name": "brewmaster",
+      "nicknames": ["bm"],
+      "role": 3
+    },
+    {
+      "name": "windwalker",
+      "nicknames": ["ww"],
+      "role": 1
+    }
+  ]
 }, {
-    "id": 11,
-    "mask": 1024,
-    "powerType": "mana",
-    "name": "Druid",
-    "color": "#FF7D0A",
-    "specs": [
-      {
-        "name": "feral",
-        "nicknames": ["ferrari"],
-        "role": 1
-      },
-      {
-        "name": "restoration",
-        "nicknames": ["resto", "hiilu", "healer", "heal", "holy"],
-        "role": 4
-      },
-      {
-        "name": "balance",
-        "nicknames": ["pöllö", "owl", "moonkin", "boomkin", "boomi"],
-        "role": 2
-      },
-      {
-        "name": "guardian",
-        "nicnames": ["prot", "tank", "bear", "karhu", "nalle"],
-        "role": 3
-      }
-    ]
+  "id": 11,
+  "mask": 1024,
+  "powerType": "mana",
+  "name": "Druid",
+  "color": "#FF7D0A",
+  "specs": [
+    {
+      "name": "feral",
+      "nicknames": ["ferrari"],
+      "role": 1
+    },
+    {
+      "name": "restoration",
+      "nicknames": ["resto", "hiilu", "healer", "heal", "holy"],
+      "role": 4
+    },
+    {
+      "name": "balance",
+      "nicknames": ["pöllö", "owl", "moonkin", "boomkin", "boomi"],
+      "role": 2
+    },
+    {
+      "name": "guardian",
+      "nicknames": ["prot", "tank", "bear", "karhu", "nalle"],
+      "role": 3
+    }
+  ]
 }, {
-    "id": 12,
-    "mask": 2048,
-    "powerType": "fury",
-    "name": "Demon Hunter",
-    "color": "#A330C9",
-    "specs": [
-      {
-        "name": "havoc",
-        "nicknames": ["dps"],
-        "role": 1
-      },
-      {
-        "name": "vengeance",
-        "nicknames": ["tank", "prot", "venge"],
-        "role": 3
-      }
-    ]
+  "id": 12,
+  "mask": 2048,
+  "powerType": "fury",
+  "name": "Demon Hunter",
+  "color": "#A330C9",
+  "specs": [
+    {
+      "name": "havoc",
+      "nicknames": ["dps"],
+      "role": 1
+    },
+    {
+      "name": "vengeance",
+      "nicknames": ["tank", "prot", "venge"],
+      "role": 3
+    }
+  ]
 }]
