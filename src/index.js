@@ -56,9 +56,9 @@ client.on('message', async message => {
       'hinta': handlePriceCommand,
       'progress': progress.handleMessage,
       'onkoarguskuollut': isArgusDead,
-      'hahmo': characters.handleMessage,
+      'bfahahmo': characters.handleMessage,
       'listaahahmot': listcharacters.handleMessage,
-      'mainit': listAllMains,
+      // 'mainit': listAllMains,
       'munmytyt': listMythicFollows,
       'seuraahahmoja': addCharToMythicPlusTracker,
       'tyhjääseuratut': clearMythicPlusFollows
@@ -77,7 +77,7 @@ client.on('message', async message => {
       'hinta': 'What will you be doing when the hodlers take over the world?',
       'progress': 'jokohan tämä on tosi, x/y=1 given that x is current kills and y is maximum kills',
       'onkoarguskuollut': 'tarkistetaanpa...',
-      'mainit': 'haetaanpas maineja pilvestä',
+      // 'mainit': 'haetaanpas maineja pilvestä',
       'munmytyt': 'Tutkitaan asiaa...',
       'seuraahahmoja': 'Lisätään hahmoa pilveen',
       'tyhjääseuratut': 'Exterminating...'
