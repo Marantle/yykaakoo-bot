@@ -10,7 +10,6 @@ const getClassColor = (classId) => {
     const classColor = parseInt(classes.find((c) => {
         return c.id === classId
     }).color.replace("#", "0x"))
-    console.log(classColor)
     return classColor
 }
 
@@ -50,12 +49,45 @@ const characters = {
     validRole: (role) => {
         return role === 'main' || role === 'alt'
     },
+    deleteCharacter: async (author, characterName) => {
+        try {
+            let user = await usersRef.child(author.id).once('value')
+            user = user.val()
+            if (user) {
+                let foundCharacterIndex = user.characters.findIndex((char) => {
+                    return char.name.toLowerCase() === characterName.toLowerCase()
+                })
+                if (foundCharacterIndex >= 0) {
+                    user.characters.splice(foundCharacterIndex, 1)
+                } else {
+                    return `Sinuun ei ole liitetty hahmoa: ${characterName}`
+                }
+                let updatedUser = Object.assign({
+                    ...user,
+                    username: author.username
+                });
+                await usersRef.child(author.id).set(updatedUser, (error) => {
+                    if (error) {
+                        console.log("Data could not be saved." + error)
+                        throw err
+                    } else {
+                        console.log("Data saved successfully.")
+                    }
+                })
+                return `${characterName} poistettu hahmoistasi`
+            } else {
+                return 'Käyttäjää ei löytynyt'
+            }
+        } catch (err) {
+            console.log(err)
+            return 'Hahmon poistossa tapahtui virhe'
+        }
+    },
     saveCharacter: async (author, character) => {
         try {
             let savedUser
             let user = await usersRef.child(author.id).once('value')
             user = user.val()
-            let newUser
             if (user) {
                 if (character.role === "main") {
                     let oldMain = user.characters.find((char) => {
@@ -66,7 +98,6 @@ const characters = {
                 let foundCharacterIndex = user.characters.findIndex((char) => {
                     return char.name === character.name
                 })
-                console.log(foundCharacterIndex)
                 if (foundCharacterIndex >= 0) {
                     user.characters.splice(foundCharacterIndex, 1, character)
                 } else {
@@ -115,10 +146,13 @@ const characters = {
             if (params[0] === 'ohje') {
                 return 'Käytä komentoa näin: §hahmo nimi spekki main/alt'
             }
+            if (params[0] === 'poista') {
+                return characters.deleteCharacter(message.author, params[1])
+            }
             let character = {
                 name: params[0] ? params[0].toLowerCase() : '',
                 spec: params[1] ? params[1].toLowerCase() : '',
-                role: params[2] ? params[2].toLowerCase() : ''
+                role: params[2] ? params[2].toLowerCase() : 'main'
             }
             const validCharacter = await characters.getCharacter(character.name)
             if (!validCharacter) {
