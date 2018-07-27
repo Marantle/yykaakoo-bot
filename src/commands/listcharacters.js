@@ -13,6 +13,10 @@ const usersDb = low(adapter)
 usersDb.defaults({ users: [] })
     .write()
 */
+
+const capitalize = (word, index) => {
+    return word.replace(/^\w/, c => c.toUpperCase());
+}
 const getCharacterClass = (id) => {
     const foundClass = classes.find((c) => {
         return c.id === id
@@ -22,7 +26,7 @@ const getCharacterClass = (id) => {
 
 const createCharactersString = (characters, role) => {
     return characters.filter((character) => character.role === role).map((character) => {
-        return `[${character.name.charAt(0).toUpperCase() + character.name.slice(1)}](https://worldofwarcraft.com/en-gb/character/darksorrow/${character.name}) - ${getCharacterClass(character.class)} - ${character.spec.name.charAt(0).toUpperCase() + character.spec.name.slice(1)}`
+        return `${capitalize(character.name.padEnd(12))} - ${capitalize(character.spec.name)}`
     }).join('\n') || '-'
 }
 
