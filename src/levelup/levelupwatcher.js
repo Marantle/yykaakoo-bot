@@ -35,8 +35,10 @@ const startLevelupWatcher = (client) => {
         
         const message = `Uusi hahmo on liittynyt joukkoon! ${charLevel.key} on tason ${charLevel.val()} sankari`
 
-        log.info(`sent new character message: ${message}`)
-        client.channels.find('id', config.levelupChannel).send(message).catch(log.error)
+        if (charLevel.val() > 109) {
+            log.info(`sent new character message: ${message}`)
+            client.channels.find('id', config.levelupChannel).send(message).catch(log.error)
+        }
     });
 
     levelUpRef.once('value',  (snapshot) =>  {
