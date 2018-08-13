@@ -13,16 +13,25 @@ const usersDb = low(adapter)
 usersDb.defaults({ users: [] })
     .write()
 */
+
+const capitalize = (word, index) => {
+    return word.replace(/^\w/, c => c.toUpperCase());
+}
 const getCharacterClass = (id) => {
     const foundClass = classes.find((c) => {
         return c.id === id
     })
     return foundClass.name;
 }
+const sortBySpec = (a, b) => {
+    if(a.spec.name < b.spec.name) return -1;
+    if(a.spec.name > b.spec.name) return 1;
+    return 0;
+}
 
 const createCharactersString = (characters, role) => {
-    return characters.filter((character) => character.role === role).map((character) => {
-        return `[${character.name.charAt(0).toUpperCase() + character.name.slice(1)}](https://worldofwarcraft.com/en-gb/character/darksorrow/${character.name}) - ${getCharacterClass(character.class)} - ${character.spec.name.charAt(0).toUpperCase() + character.spec.name.slice(1)}`
+    return characters.filter((character) => character.role === role).sort(sortBySpec).map((character) => {
+        return `${capitalize(character.name.padEnd(13))} ${capitalize(character.spec.name)}`
     }).join('\n') || '-'
 }
 
@@ -47,31 +56,17 @@ const listcharacters = {
             return character.spec.role === 4
         })
         
-        let response = {
-            embed: {
-                color: 3447003,
-                title: role === 'main' ? `BFA mainit` : 'BFA altit',
-                description: '',
-                fields: [
-                    {
-                        name: `Tankit ${tanks.filter(character => character.role === role).length}`,
-                        value: createCharactersString(tanks, role)
-                    },
-                    {
-                        name: `Parantajat ${healers.filter(character => character.role === role).length}`,
-                        value: createCharactersString(healers, role)
-                    },
-                    {
-                        name: `Melee dps: ${mdps.filter(character => character.role === role).length}`,
-                        value: createCharactersString(mdps, role)
-                    },
-                    {
-                        name: `Ranged dps: ${rdps.filter(character => character.role === role).length}`,
-                        value: createCharactersString(rdps, role)
-                    }
-                ]
-            }
-        }
+        const myFilter = ((role) => character => character.role === role)(role)
+
+        let response = `Tankit ${tanks.filter(myFilter).length}\n`
+        response += createCharactersString(tanks, role) + '\n\n'
+        response += `Parantajat ${healers.filter(myFilter).length}\n`
+        response += createCharactersString(healers, role)+ '\n\n'
+        response += `Melee ${mdps.filter(myFilter).length}\n`
+        response += createCharactersString(mdps, role)+ '\n\n'
+        response += `Ranged ${rdps.filter(myFilter).length}\n`
+        response += createCharactersString(rdps, role)
+        response = "```" + response + "```"
         return response
     },
     handleMessage: async (params, sentMessage, message) => {
