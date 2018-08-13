@@ -1,17 +1,17 @@
-import * as winston from 'winston'
+const { transports, createLogger, format } = require('winston');
 
-const logger = winston.createLogger({
+const logger = createLogger({
     level: 'info',
-    format: winston.format.json(),
+    format: format.combine(
+        format.timestamp(),
+        format.json()
+    ),
     transports: [
-        new winston.transports.File({ filename: 'error.log', level: 'error' }),
-        new winston.transports.File({ filename: 'combined.log' })
+        new transports.Console(),
+        new transports.File({filename: 'logs/error/error.log', level: 'error'}),
+        new transports.File({filename: 'logs/activity/activity.log', level:'info'})
     ]
 });   
-logger.remove(winston.transports.Console);
-logger.add(new winston.transports.Console({
-    format: winston.format.simple()
-}));
 logger.level = 'debug';
 
 export default logger 
