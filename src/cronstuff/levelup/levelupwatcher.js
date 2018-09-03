@@ -1,6 +1,6 @@
-import log from '../lib/logger'
-import levelUpRef from '../db/levelup.js'
-import config from '../config/config'
+import log from '../../lib/logger'
+import levelUpRef from '../../db/levelup.js'
+import config from '../../config/config'
 const startLevelupWatcher = (client) => {
 
 
