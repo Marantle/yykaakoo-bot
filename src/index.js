@@ -21,8 +21,9 @@ import progress from './commands/progress'
 import isArgusDead from './commands/isargusdead'
 import listAllMains from './commands/getmains.js'
 import listMythicFollows from './commands/listmythicfollows.js'
-import startLevelupUpdater from './levelup/levelupupdater'
-import startLevelupWatcher from './levelup/levelupwatcher'
+import startLevelupUpdater from './cronstuff/levelup/levelupupdater'
+import startLevelupWatcher from './cronstuff/levelup/levelupwatcher'
+import startApUpdater from './cronstuff/apsnitch/apsnitchupdater'
 logger.info(`bot starting`)
 const client = new Client()
 
@@ -32,7 +33,7 @@ client.on('ready', () => {
 
 startLevelupUpdater()
 startLevelupWatcher(client)
-
+startApUpdater()
 
 let idToMention = (id) => {return `<@${id}>`}
 
@@ -49,7 +50,7 @@ client.on('message', async message => {
   if (message.content.substring(0, 1) === '§') {
     let reply;
     let simpleCommands = {
-      'lumoukset': findAllMissingEnchants,
+      // 'lumoukset': findAllMissingEnchants,
       'parhaatscoret': handleTopScoresCommand,
       'score': handleSingleScoreCommand,
       'kannusta': cheerUp,
@@ -61,7 +62,7 @@ client.on('message', async message => {
       'hinta': handlePriceCommand,
       'progress': progress.handleMessage,
       'onkoarguskuollut': isArgusDead,
-      'bfahahmo': characters.handleMessage,
+      // 'bfahahmo': characters.handleMessage,
       'listaahahmot': listcharacters.handleMessage,
       // 'mainit': listAllMains,
       'munmytyt': listMythicFollows,
@@ -70,7 +71,7 @@ client.on('message', async message => {
     }
 
     let commandPlaceholders = {
-      'lumoukset': 'Etsitään lumouksettomia...',
+      // 'lumoukset': 'Etsitään lumouksettomia...',
       'parhaatscoret': 'Katsotaanpa ketä on paras ja ketä ei...',
       'score': 'Score vai bore? no kohta nähdään...',
       'kannusta': 'Hyvä kannustaja! Kannustus tulossa...',
