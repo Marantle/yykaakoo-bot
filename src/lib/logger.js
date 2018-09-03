@@ -8,8 +8,8 @@ const logger = createLogger({
     ),
     transports: [
         new transports.Console(),
-        new transports.File({filename: 'logs/error/error.log', level: 'error'}),
-        new transports.File({filename: 'logs/activity/activity.log', level:'info'})
+        new transports.File({filename: 'error.log', level: 'error'}),
+        new transports.File({filename: 'activity.log', level:'info'})
     ]
 });   
 logger.level = 'debug';
