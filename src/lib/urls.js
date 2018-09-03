@@ -11,3 +11,14 @@ export function getGuildDataUrl() {
     address.searchParams.append('apikey', auth.masheryKey)
     return address.href
 }
+
+export function getCharItemsUrl(charName, realm) {
+    const address = new URL(config.mashery.baseurl)
+    address.pathname = `/${config.mashery.itempath}/${realm}/${charName}`
+    address.searchParams.append('locale', config.mashery.locale)
+    address.searchParams.append('fields', config.mashery.itemfields)
+    address.searchParams.append('apikey', auth.masheryKey)
+    console.log(address.href)
+    return address.href
+    
+}
