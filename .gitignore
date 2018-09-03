@@ -1,5 +1,5 @@
 #Apikeystuff
-src/**/auth.json
+src/**/*auth.json
 src/**/serviceAccountKey.json
 
 #build dir
