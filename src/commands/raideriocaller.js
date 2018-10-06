@@ -70,7 +70,6 @@ let handleMissingMythicsCommand = async (params) => {
   try {
     let result = await fetchRunsForEveryone()
     result = result.filter(player => !player.runs.length || player.runs.length < 1 || player.runs[0].mythic_level < 15)
-    result.forEach(console.log)
     result = result.map(player => player.name)
     result.sort()
     let msg = result.reduce((s1, s2) => s1 + '\n' + s2)

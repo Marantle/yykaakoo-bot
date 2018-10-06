@@ -21,13 +21,18 @@ import progress from './commands/progress'
 import isArgusDead from './commands/isargusdead'
 import listAllMains from './commands/getmains.js'
 import listMythicFollows from './commands/listmythicfollows.js'
-
-logger.info(`bot starting ${new Date}`)
+import startLevelupUpdater from './levelup/levelupupdater'
+import startLevelupWatcher from './levelup/levelupwatcher'
+logger.info(`bot starting`)
 const client = new Client()
 
 client.on('ready', () => {
   logger.info('I am ready!')
 })
+
+startLevelupUpdater()
+startLevelupWatcher(client)
+
 
 let idToMention = (id) => {return `<@${id}>`}
 
