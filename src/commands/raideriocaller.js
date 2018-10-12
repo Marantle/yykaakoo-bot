@@ -1,11 +1,14 @@
 import * as path from 'path'
 import * as axios from 'axios'
-import players from '../config/players.json'
+//import players from '../config/players.json'
+
 import * as prefixes from '../config/prefixes.json'
 import * as Promise from 'bluebird'
 import * as querystring from 'querystring'
 import logger from '../lib/logger'
+import { getPlayers } from '../lib/datagetters'
 import config from '../config/config.json'
+
 
 const scoresField = 'mythic_plus_scores'
 const weeklyTopThree = 'mythic_plus_weekly_highest_level_runs'
@@ -24,7 +27,8 @@ let handleSingleScoreCommand = async (params) => {
   }
 }
 
-let handleTopScoresCommand = () => {
+let handleTopScoresCommand = async () => {
+  const players = await getPlayers()
   return new Promise((resolve, reject) => {
     let axiosPromises = []
     players.forEach((player, i) => {
@@ -68,20 +72,21 @@ let handleWeeklyRunCommand = async (params, messageToEdit) => {
 
 let handleMissingMythicsCommand = async (params) => {
   try {
-    let result = await fetchRunsForEveryone()
-    result = result.filter(player => !player.runs.length || player.runs.length < 1 || player.runs[0].mythic_level < 15)
+    const players = await getPlayers()
+    let result = await fetchRunsForEveryone(players)
+    result = result.filter(player => !player.runs.length || player.runs.length < 1 || player.runs[0].mythic_level < 10)
     result = result.map(player => player.name)
     result.sort()
     let msg = result.reduce((s1, s2) => s1 + '\n' + s2)
 
-    msg = 'Näiltä hahmoilta puuttuu +15 myttynen, aijjai...' + '```\n' + msg.trim() + '\n```'
+    msg = 'Näiltä hahmoilta puuttuu +10 myttynen, vielä ehtii!' + '```\n' + msg.trim() + '\n```'
     return msg
   } catch (error) {
     throw error
   }
 }
 
-function fetchRunsForEveryone() {
+function fetchRunsForEveryone(players) {
   return new Promise((resolve, reject) => {
     let playersRuns = []
     let axiosPromises = []
@@ -169,7 +174,7 @@ function findRaiderIoScoreByUser(charName, delay = 0) {
         .then(result => {
           resolve(result)
         }).catch(function (error) {
-          console.error(`Error finding scorebyuser for url ${scoreUrl}`)
+          console.error(`Error finding scorebyuser for url ${scoreUrl}, ${error.response.status}`)
           let errDesc = ' E'
           if (error.response) errDesc += error.response.status
           else errDesc += '000'

@@ -24,6 +24,8 @@ import listMythicFollows from './commands/listmythicfollows.js'
 import startLevelupUpdater from './cronstuff/levelup/levelupupdater'
 import startLevelupWatcher from './cronstuff/levelup/levelupwatcher'
 import startApUpdater from './cronstuff/apsnitch/apsnitchupdater'
+import { azeritePower, itemLevel } from './commands/mychardata'
+import { topItemLevel, topAzerite } from './commands/toplists'
 logger.info(`bot starting`)
 const client = new Client()
 
@@ -57,7 +59,7 @@ client.on('message', async message => {
       'hauku': mock,
       'logs': WowLogs.handleMessage,
       'viikonmytyt': handleWeeklyRunCommand,
-      'onnettomat': handleMissingMythicsCommand,
+      'myty10': handleMissingMythicsCommand,
       'sää': handleCurrentWeatherCommand,
       'hinta': handlePriceCommand,
       'progress': progress.handleMessage,
@@ -67,7 +69,11 @@ client.on('message', async message => {
       // 'mainit': listAllMains,
       'munmytyt': listMythicFollows,
       'seuraahahmoja': addCharToMythicPlusTracker,
-      'tyhjääseuratut': clearMythicPlusFollows
+      'tyhjääseuratut': clearMythicPlusFollows,
+      'munazerite': azeritePower,
+      'topazerite': topAzerite,
+      'munilvl': itemLevel,
+      'topilvl': topItemLevel
     }
 
     let commandPlaceholders = {
@@ -78,7 +84,7 @@ client.on('message', async message => {
       'hauku': 'Miksi haluat haukkua?', 
       'logs': 'Rupeatko metsuriksi? odota ole hyvä...',
       'viikonmytyt': 'Katsotaanpa onko joku jo kyllästynyt tähän aivottomaan grindiin...',
-      'onnettomat': 'Vai ponnettomat? tsekataanpa...',
+      'myty10': 'Katsotaanpa kyby mytyt!',
       'sää': 'Pilvistä mahdollisella lihapullia, heh...', 
       'hinta': 'What will you be doing when the hodlers take over the world?',
       'progress': 'jokohan tämä on tosi, x/y=1 given that x is current kills and y is maximum kills',

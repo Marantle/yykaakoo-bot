@@ -5,10 +5,10 @@ import {
 import log from '../../lib/logger'
 import * as cron from 'node-cron'
 import * as axios from 'axios'
-import charDataRef from '../../db/levelup.js'
+import charDataRef from '../../db/chardata.js'
 
 const startApUpdater = async () => {
-  cron.schedule('0 * * * *', async () => {
+  cron.schedule('30 * * * *', async () => {
     try {
       const guildData = await axios.get(getGuildDataUrl())
       const {
@@ -51,7 +51,7 @@ const startApUpdater = async () => {
             })
 
           }
-        }
+          await timeout(100);}
       })
 
     } catch (error) {
@@ -60,6 +60,8 @@ const startApUpdater = async () => {
   })
 }
 
-
+function timeout(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 export default startApUpdater
