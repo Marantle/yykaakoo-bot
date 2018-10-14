@@ -15,7 +15,7 @@ import { findAllMissingEnchants } from './commands/enchantsnitch'
 import { handleCurrentWeatherCommand } from './commands/weather'
 import { handlePriceCommand } from './commands/monopolymoney'
 import { cheerUp, mock } from './commands/random'
-import { WowLogs, characters, listcharacters } from './commands'
+import { WowLogs, characters, listcharacters, roll } from './commands'
 import { addCharToMythicPlusTracker, clearMythicPlusFollows } from './commands/addcharnames.js'
 import progress from './commands/progress'
 import isArgusDead from './commands/isargusdead'
@@ -73,7 +73,8 @@ client.on('message', async message => {
       'munazerite': azeritePower,
       'topazerite': topAzerite,
       'munilvl': itemLevel,
-      'topilvl': topItemLevel
+      'topilvl': topItemLevel,
+      'roll': roll
     }
 
     let commandPlaceholders = {
@@ -92,7 +93,8 @@ client.on('message', async message => {
       // 'mainit': 'haetaanpas maineja pilvestä',
       'munmytyt': 'Tutkitaan asiaa...',
       'seuraahahmoja': 'Lisätään hahmoa pilveen',
-      'tyhjääseuratut': 'Exterminating...'
+      'tyhjääseuratut': 'Exterminating...',
+      'roll': 'Rollataan...'
     }
 
     console.log()

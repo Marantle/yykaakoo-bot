@@ -17,3 +17,5 @@ auth.json example
 3. npm run webpack once to generate files then
 
 4. npm run start to start webpack watch and nodemon to auto restart the bot after transpile.
+
+![Works on my machine](https://i.stack.imgur.com/kaxff.png "Works on my machine")
