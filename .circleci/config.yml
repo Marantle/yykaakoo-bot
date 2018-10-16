@@ -38,7 +38,7 @@ jobs:
 
       - run: cat ./src/config/serviceAccountKey.json
       - run: cat ./src/config/auth.json
-      - run: yarn build
+      - run: yarn dev
 
       - store_artifacts:
           path: ./dist/main.js
