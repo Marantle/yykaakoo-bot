@@ -20,7 +20,7 @@
     "giphy-api": "^1.2.7",
     "moment": "^2.21.0",
     "node-cron": "^1.2.1",
-    "winston": "^3.0.0-rc1"
+    "winston": "^3.1.0"
   },
   "devDependencies": {
     "nodemon": "^1.12.7",
