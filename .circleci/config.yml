@@ -32,10 +32,12 @@ jobs:
             echo $AUTH_CONFIG > ./src/config/auth.json
 
       - run:
-          name: Save serice key file from environment
+          name: Save service key file from environment
           command: |
             echo $FIREBASE_AUTH > ./src/config/serviceAccountKey.json
 
+      - run: cat ./src/config/serviceAccountKey.json
+      - run: cat ./src/config/auth.json
       - run: yarn build
 
       - store_artifacts:
