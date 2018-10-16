@@ -26,7 +26,7 @@ const options = {
     },
     file: {
         colorize: false,
-        filename: path.join(logDir, '/app.log'),
+        filename: path.join(logDir, '/yykaakoobot.log'),
         handleExceptions: true,
         json: true,
         level: 'info',
