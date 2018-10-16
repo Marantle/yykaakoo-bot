@@ -36,8 +36,6 @@ jobs:
           command: |
             echo $FIREBASE_AUTH > ./src/config/serviceAccountKey.json
 
-      - run: cat ./src/config/serviceAccountKey.json
-      - run: cat ./src/config/auth.json
       - run: yarn dev
 
       - store_artifacts:
