@@ -2,21 +2,28 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-defaults: &defaults
-  working_directory: ~/yykaakoo-bot
-  docker:
-    - image: circleci/node:10.12.0
-
 version: 2
 jobs:
   build:
-    <<: *defaults
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:7.10
+      
+      # Specify service dependencies here if necessary
+      # CircleCI maintains a library of pre-built images
+      # documented at https://circleci.com/docs/2.0/circleci-images/
+      # - image: circleci/mongo:3.4.4
+
+    working_directory: ~/repo
+
     steps:
       - checkout
 
+      # Download and cache dependencies
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
       - run: yarn install
@@ -25,48 +32,8 @@ jobs:
           paths:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
+        
+      # run tests!
+      - run: yarn test
 
-      - run:
-          name: Save auth file from environment
-          command: |
-            echo $AUTH_CONFIG > ./src/config/auth.json
 
-      - run:
-          name: Save service key file from environment
-          command: |
-            echo $FIREBASE_AUTH > ./src/config/serviceAccountKey.json
-
-      - run: yarn dev
-
-      - store_artifacts:
-          path: ./dist/main.js
-          destination: main.js
-      - persist_to_workspace:
-          root: dist
-          paths:
-            - main.js
-
-  deploy:
-    machine:
-      enabled: true
-    working_directory: ~/yykaakoo-bot
-    steps:
-      - attach_workspace:
-          # Must be absolute path or relative path from working_directory
-          at: ./dist
-      - run:
-          name: Deploy Over SSH
-          command: |
-            scp dist/main.js $SSH_USER@$SSH_HOST:/var/node/yykaakoo-bot
-
-workflows:
-  version: 2
-  build-and-deploy:
-    jobs:
-      - build
-      - deploy:
-          requires:
-            - build
-          filters:
-            branches:
-              only: master
