@@ -134,23 +134,14 @@ client.on('message', async message => {
 });
 
 client.on('guildMemberAdd', member => {
-  let msg = ''
-  let block = '```'
-  msg += 'Tervetuloa Ryöstöretken Discord palvelimelle! \n'
-  msg += `Olen Ryöstöretken automaattinen robotti ja minulle voi kertoa asioita.\n`
-  msg += `Vapaasanaisen hakemuksen voi laittaa minulle yksityisviestinä ja laitan se johtajien näkyville. Vastaamme yksityisviestinä mahdollisimman pian.\n`
-  msg += `Otan myös palautetta vastaan samalla tavalla eli toisin sanoen ohjaan kaikki viestit johtajien nähtäviin mutta muista että voit lähettää vain muutaman viestin kerrallaan.\n`
-  msg += 'Johtajiin kuuluu Qini, Tanih, Zintti, Rekkisvaan, Astrà, Málli, Traja, alla vielä lyhyt kuvaus joukostamme ja vaikka et pelaisikaan wowia niin täällä voi hengailla!'
-  member.send(msg)
-    .then(sendMessage => {
-      let secondMessage = ''
-      secondMessage += 'Olemme Mythic raideja harrastava täysin suomalainen kilta Darksorrow palvelimella, progressimme löytää osoitteesta https://www.wowprogress.com/guild/eu/darksorrow/Ry%C3%B6st%C3%B6retki\n'
-      secondMessage += 'Killan johtoporras koostuu suureksi osaksi Grim Batolilta kotoisin olevasta porukasta ja osa heistä pelannut jo vanillasta asti.\n'
-      secondMessage += `Minut on koodannut suureksi osaksi tämä tyyppi https://www.wowprogress.com/character/eu/darksorrow/Tanih\n tai ${idToMention(226502292625424396)}`
-      secondMessage += 'Eikä hätää, en enää laita viestiä ilman syytä, tämä oli ainoa mainos!\n'
-      member.send(secondMessage).catch(console.error)
-    })
-});
+  let msg = `
+  Eli nyt ollaan edetty siihen pisteeseen, että Ryöstöretken tarina Darksorrowilla ja alliancella päättyy. 
+  Syynä tähän raidaavien pelaajien väheneminen sekä muutenkin vähäinen innostus BFA:a kohtaan. 
+  Ryöstöretki jatkaa toimintaa Twisting Netherin hordepuolella saman nimen alla hieman community-tyyppisenä, raidaaminen ei ole ensisijaisesti tavoitteena, mutta mahdollisuutena. Tulevaisuus näyttää. 
+  Kaikki nykyiset jäsenet ovat tervetulleita mukaan halutessaan!
+  `
+member.send(msg)
+  .then(message => `sent message to ${member.username}`)
+  .catch(console.error)
 
 client.login(auth.discordBotToken)
-
