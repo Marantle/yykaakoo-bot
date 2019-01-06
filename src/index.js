@@ -134,12 +134,13 @@ client.on('message', async message => {
 });
 
 client.on('guildMemberAdd', member => {
-  let msg = `
-  Eli nyt ollaan edetty siihen pisteeseen, että Ryöstöretken tarina Darksorrowilla ja alliancella päättyy.
-  Syynä tähän raidaavien pelaajien väheneminen sekä muutenkin vähäinen innostus BFA:a kohtaan.
-  Ryöstöretki jatkaa toimintaa Twisting Netherin hordepuolella saman nimen alla hieman community-tyyppisenä, raidaaminen ei ole ensisijaisesti tavoitteena, mutta mahdollisuutena. Tulevaisuus näyttää.
-  Kaikki nykyiset jäsenet ovat tervetulleita mukaan halutessaan!
-  `
+  let msg = 
+`
+Eli nyt ollaan edetty siihen pisteeseen, että Ryöstöretken tarina Darksorrowilla ja alliancella päättyy.
+Syynä tähän raidaavien pelaajien väheneminen sekä muutenkin vähäinen innostus BFA:a kohtaan.
+Ryöstöretki jatkaa toimintaa Twisting Netherin hordepuolella saman nimen alla hieman community-tyyppisenä, raidaaminen ei ole ensisijaisesti tavoitteena, mutta mahdollisuutena. Tulevaisuus näyttää.
+Kaikki nykyiset jäsenet ovat tervetulleita mukaan halutessaan!
+`
 member.send(msg)
   .then(message => `sent message to ${member.username}`)
   .catch(console.error)
