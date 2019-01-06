@@ -143,5 +143,5 @@ client.on('guildMemberAdd', member => {
 member.send(msg)
   .then(message => `sent message to ${member.username}`)
   .catch(console.error)
-
+})
 client.login(auth.discordBotToken)
