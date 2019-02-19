@@ -27,7 +27,7 @@ import startApUpdater from './cronstuff/apsnitch/apsnitchupdater'
 import { azeritePower, itemLevel } from './commands/mychardata'
 import { topItemLevel, topAzerite } from './commands/toplists'
 logger.info(`bot starting`)
-const client = new Client()
+const client = new Client({autoReconnect:true})
 
 client.on('ready', () => {
   logger.info('I am ready!')
