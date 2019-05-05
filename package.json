@@ -10,7 +10,9 @@
     "build": "webpack --mode production",
     "webpack:watch": "webpack --mode development --watch",
     "dev": "webpack --mode development",
-    "nodemon": "nodemon --exec node ./dist/main.js"
+    "nodemon": "nodemon --exec node ./dist/main.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -20,12 +22,14 @@
     "giphy-api": "^1.2.7",
     "moment": "^2.21.0",
     "node-cron": "^1.2.1",
-    "winston": "^3.1.0"
+    "winston": "^3.1.0",
+    "snyk": "^1.161.1"
   },
   "devDependencies": {
     "nodemon": "^1.12.7",
     "npm-run-all": "^4.1.2",
     "webpack": "^4.1.1",
     "webpack-cli": "^2.0.12"
-  }
+  },
+  "snyk": true
 }
